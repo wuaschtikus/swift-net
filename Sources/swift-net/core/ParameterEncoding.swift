@@ -103,13 +103,13 @@ public struct URLEncoding: ParameterEncoding {
     
     // MARK: Properties
     /// Returns a default `URLEncoding` instance with a `.methodDependent` destination.
-    static var `default`: URLEncoding { return URLEncoding() }
+    public static var `default`: URLEncoding { return URLEncoding() }
     
     /// Returns a `URLEncoding` instance with a `.queryString` destination.
-    static var queryString: URLEncoding { return URLEncoding(destination: .queryString) }
+    public static var queryString: URLEncoding { return URLEncoding(destination: .queryString) }
     
     /// Returns a `URLEncoding` instance with an `.httpBody` destination.
-    static var httpBody: URLEncoding { return URLEncoding(destination: .httpBody) }
+    public static var httpBody: URLEncoding { return URLEncoding(destination: .httpBody) }
     
     /// The destination defining where the encoded query string is to be applied to the URL request.
     let destination: Destination
