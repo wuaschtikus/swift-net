@@ -44,7 +44,7 @@ public protocol ParameterEncoding {
 ///
 /// `BoolEncoding` can be used to configure how boolean values are encoded. The default behavior is to encode
 /// `true` as 1 and `false` as 0.
-struct URLEncoding: ParameterEncoding {
+public struct URLEncoding: ParameterEncoding {
     
     // MARK: Helper Types
     /// Defines whether the url-encoded query string is applied to the existing query string or HTTP body of the
@@ -137,7 +137,7 @@ struct URLEncoding: ParameterEncoding {
     }
     
     // MARK: Encoding
-    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
         
         guard let parameters = parameters else { return urlRequest }
@@ -221,7 +221,7 @@ struct URLEncoding: ParameterEncoding {
 // MARK: -
 /// Uses `JSONSerialization` to create a JSON representation of the parameters object, which is set as the body of the
 /// request. The `Content-Type` HTTP header field of an encoded request is set to `application/json`.
-struct JSONEncoding: ParameterEncoding {
+public struct JSONEncoding: ParameterEncoding {
     
     // MARK: Properties
     /// Returns a `JSONEncoding` instance with default writing options.
@@ -242,7 +242,7 @@ struct JSONEncoding: ParameterEncoding {
     }
     
     // MARK: Encoding
-    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
         
         guard let parameters = parameters else { return urlRequest }
