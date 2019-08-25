@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case put = "PUT"
     case post = "POST"
     case delete = "DELETE"
@@ -15,7 +15,7 @@ enum HTTPMethod: String {
     case head = "HEAD"
 }
 
-protocol TargetType {
+public protocol TargetType {
     
     /// The target's base `URL`.
     var baseURL: URL { get }

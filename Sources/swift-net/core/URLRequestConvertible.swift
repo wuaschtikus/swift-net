@@ -52,7 +52,7 @@ extension URLComponents: URLConvertible {
 
 // MARK: -
 /// Types adopting the `URLRequestConvertible` protocol can be used to safely construct `URLRequest`s.
-protocol URLRequestConvertible {
+public protocol URLRequestConvertible {
     /// Returns a `URLRequest` or throws if an `Error` was encoutered.
     ///
     /// - Returns: A `URLRequest`.

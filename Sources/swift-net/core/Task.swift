@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents an HTTP task.
-enum Task {
+public enum Task {
     
     /// A request with no additional data.
     case requestPlain

@@ -14,10 +14,10 @@ enum ParameterEncodingError: Error {
 }
 
 /// A dictionary of parameters to apply to a `URLRequest`.
-typealias Parameters = [String: Any]
+public typealias Parameters = [String: Any]
 
 /// A type used to define how a set of parameters are applied to a `URLRequest`.
-protocol ParameterEncoding {
+public protocol ParameterEncoding {
     /// Creates a `URLRequest` by encoding parameters and applying them on the passed request.
     ///
     /// - Parameters:

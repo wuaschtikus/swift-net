@@ -8,9 +8,9 @@
 import Foundation
 import Rainbow
 
-typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
+public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 
-struct Provider {
+public struct Provider {
     private let session: URLSession
     private let verbose: Bool
     
@@ -23,7 +23,7 @@ struct Provider {
 }
 
 extension Provider {
-    func request(target: TargetType, callback: @escaping (RequestResult) -> Void) {
+    public func request(target: TargetType, callback: @escaping (RequestResult) -> Void) {
         let request = createRequest(target: target)
         
         if verbose {
