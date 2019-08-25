@@ -225,10 +225,10 @@ public struct JSONEncoding: ParameterEncoding {
     
     // MARK: Properties
     /// Returns a `JSONEncoding` instance with default writing options.
-    static var `default`: JSONEncoding { return JSONEncoding() }
+    public static var `default`: JSONEncoding { return JSONEncoding() }
     
     /// Returns a `JSONEncoding` instance with `.prettyPrinted` writing options.
-    static var prettyPrinted: JSONEncoding { return JSONEncoding(options: .prettyPrinted) }
+    public static var prettyPrinted: JSONEncoding { return JSONEncoding(options: .prettyPrinted) }
     
     /// The options for writing the parameters as JSON data.
     let options: JSONSerialization.WritingOptions
