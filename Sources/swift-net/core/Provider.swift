@@ -14,7 +14,7 @@ public struct Provider {
     private let session: URLSession
     private let verbose: Bool
     
-    init(verbose: Bool = false) {
+    public init(verbose: Bool = false) {
         let urlSessionConfig = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfig)
         self.session = urlSession
