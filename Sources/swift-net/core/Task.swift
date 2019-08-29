@@ -19,8 +19,8 @@ public enum Task {
     /// A requests body set with encoded parameters.
     case requestParameters(parameters: [String: Any], encoding: ParameterEncoding)
     
-    /// A requests body set with data, combined with url parameters.
-    // case requestCompositeData(bodyData: Data, urlParameters: [String: Any])
+    // A requests body set with data, combined with url parameters.
+    case requestCompositeData(bodyData: Data, urlParameters: [String: Any])
     
     /// A requests body set with encoded parameters combined with url parameters.
     // case requestCompositeParameters(bodyParameters: [String: Any], bodyEncoding: ParameterEncoding, urlParameters: [String: Any])
