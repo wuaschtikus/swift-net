@@ -76,7 +76,7 @@ extension Provider {
                                         mimeType: "image/jpg",
                                         filename: "file")
             case .requestCompositeData(let bodyData, let urlParameters):
-                r = try URLEncoding.default.encode(r, with: urlParameters)
+                r = try URLEncoding.queryString.encode(r, with: urlParameters)
                 r.httpBody = bodyData
                 
             }
