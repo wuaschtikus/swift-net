@@ -33,22 +33,33 @@ extension Provider {
         let request = createRequest(target: target)
         
         if verbose {
-            log.verbose("""
-                *** Request: \(request.httpMethod ?? "http method n/a") \(request.debugDescription)
-                Headers: \(request.allHTTPHeaderFields ?? [:])
-                Body: \(String(data: request.httpBody ?? Data(), encoding: .utf8) ?? "")
-                """.lightCyan)
+            log.verbose("\(request.httpMethod ?? "http method n/a") \(request.debugDescription)".lightCyan)
+            
+            if let headers = request.allHTTPHeaderFields {
+                headers.forEach { (key, value) in
+                    log.verbose("\(key): \(value)".lightCyan)
+                }
+            }
+            
+            if let data = request.httpBody {
+                log.verbose("Body: (\(String(data: data, encoding: .utf8) ?? "")".lightCyan)
+            }
         }
         
         let task = session.dataTask(with: request) { (result) in
             if self.verbose {
                 switch result {
                 case .success(let response, let data):
-                    log.verbose("""
-                        *** Response: \(response.url?.absoluteString ?? "") \(response.statusCode)
-                        Headers: \(response.allHeaderFields)
-                        Body: \(String(data: data, encoding: .utf8) ?? "n/a")
-                        """.lightCyan)
+                    log.verbose("\(response.url?.absoluteString ?? "") \(response.statusCode)")
+                    
+                    if let headers = request.allHTTPHeaderFields {
+                        headers.forEach { (key, value) in
+                            log.verbose("\(key): \(value)".lightCyan)
+                        }
+                    }
+                    
+                    log.verbose("Body: (\(String(data: data, encoding: .utf8) ?? "")".lightCyan)
+                
                 case .failure(let error):
                     log.error("\(error)")
                 }
