@@ -17,8 +17,7 @@ public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 var df: DateFormatter {
     get {
         let df = DateFormatter()
-        df.dateStyle = .short
-        df.timeStyle = .full
+        df.dateFormat = "y-MM-dd H:m:ss.SSSS"
         return df
     }
 }
