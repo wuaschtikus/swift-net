@@ -7,6 +7,10 @@
 
 import Foundation
 import Rainbow
+import SwiftyBeaver
+
+let log = SwiftyBeaver.self
+let console = ConsoleDestination()
 
 public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 
@@ -19,6 +23,8 @@ public struct Provider {
         let urlSession = URLSession(configuration: urlSessionConfig)
         self.session = urlSession
         self.verbose = verbose
+        
+        log.addDestination(console)
     }
 }
 
@@ -27,7 +33,7 @@ extension Provider {
         let request = createRequest(target: target)
         
         if verbose {
-            print("""
+            log.verbose("""
                 *** Request: \(request.httpMethod ?? "http method n/a") \(request.debugDescription)
                 Headers: \(request.allHTTPHeaderFields ?? [:])
                 Body: \(String(data: request.httpBody ?? Data(), encoding: .utf8) ?? "")
@@ -38,13 +44,13 @@ extension Provider {
             if self.verbose {
                 switch result {
                 case .success(let response, let data):
-                    print("""
+                    log.verbose("""
                         *** Response: \(response.url?.absoluteString ?? "") \(response.statusCode)
                         Headers: \(response.allHeaderFields)
                         Body: \(String(data: data, encoding: .utf8) ?? "n/a")
                         """.lightCyan)
                 case .failure(let error):
-                    print(error.localizedDescription.lightCyan)
+                    log.error("\(error)")
                 }
             }
             callback(result)
