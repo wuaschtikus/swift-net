@@ -14,6 +14,15 @@ let console = ConsoleDestination()
 
 public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 
+var df: DateFormatter {
+    get {
+        let df = DateFormatter()
+        df.dateStyle = .short
+        df.timeStyle = .full
+        return df
+    }
+}
+
 public struct Provider {
     private let session: URLSession
     private let verbose: Bool
@@ -32,34 +41,22 @@ extension Provider {
     public func request(target: TargetType, callback: @escaping (RequestResult) -> Void) {
         let request = createRequest(target: target)
         
-        if verbose {
-            log.verbose("\(request.httpMethod ?? "http method n/a") \(request.debugDescription)".lightCyan)
-            
-            if let headers = request.allHTTPHeaderFields {
-                headers.forEach { (key, value) in
-                    log.verbose("\(key): \(value)".lightCyan)
-                }
-            }
-            
-            if let data = request.httpBody {
-                log.verbose("Body: (\(String(data: data, encoding: .utf8) ?? "")".lightCyan)
-            }
-        }
-        
         let task = session.dataTask(with: request) { (result) in
             if self.verbose {
                 switch result {
                 case .success(let response, let data):
-                    log.verbose("\(response.url?.absoluteString ?? "") \(response.statusCode)")
+                    let timestamp = Date()
+                    
+                    log.verbose("\(df.string(from: timestamp)) \(request.httpMethod ?? "http method n/a") \(request.debugDescription) \(response.statusCode)".lightCyan)
                     
                     if let headers = request.allHTTPHeaderFields {
                         headers.forEach { (key, value) in
-                            log.verbose("\(key): \(value)".lightCyan)
+                            log.verbose("\(df.string(from: timestamp)) \(key): \(value)".lightCyan)
                         }
                     }
                     
-                    log.verbose("Body: (\(String(data: data, encoding: .utf8) ?? "")".lightCyan)
-                
+                    log.verbose("\(df.string(from: timestamp)) Body: \(String(data: data, encoding: .utf8) ?? "")".lightCyan)
+                    
                 case .failure(let error):
                     log.error("\(error)")
                 }
