@@ -10,7 +10,6 @@ import Rainbow
 import SwiftyBeaver
 
 let log = SwiftyBeaver.self
-let console = ConsoleDestination()
 
 public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 
@@ -31,8 +30,6 @@ public struct Provider {
         let urlSession = URLSession(configuration: urlSessionConfig)
         self.session = urlSession
         self.verbose = verbose
-        
-        log.addDestination(console)
     }
 }
 
